@@ -1,0 +1,46 @@
+{% form_theme form 'bootstrap_5_layout.html.twig' %}{{ form_start(form)  }}
+<div class="container">
+    {{ form_start(form) }}
+        <div class="row">
+            {{ form_row(form.Name) }}
+            {{ form_row(form.adress1) }}
+            {{ form_row(form.adress2) }}
+            <div class="col-sm">
+            {{ form_row(form.zipcode) }}
+            </div>
+            <div class="col-sm">
+            {{ form_row(form.city) }}
+            </div>
+            {{ form_row(form.country) }}
+            <div class="col-sm-6">
+            {{ form_row(form.phone) }}
+            </div>
+            <div class="col-sm-6">
+            {{ form_row(form.email) }}
+            </div>
+            <div class="col-sm">
+                {{ form_row(form.contactFirstName) }}
+            </div>
+            <div class="col-sm">
+                {{ form_row(form.contactLastName) }}
+            </div>
+            <div class="col-sm">
+            {{ form_row(form.contactPhone) }}
+            </div>
+            <div class="col-sm">
+            {{ form_row(form.contactEmail) }}
+            </div>
+            {{ form_row(form.notes) }}
+            {{ form_row(form.active) }}
+            
+            {% if form.catalog %}
+                <img src="{{ asset(catalogs_directory ~ provider.catalog) }}" alt="">
+            {% endif %}
+            {{ form_row(form.catalog) }}
+
+        </div>
+{{ form_end(form) }}
+    <div class="row-cols-lg-3">
+    <button class="btn">{{ button_label|default('Save') }}</button>
+    </div>
+</div>

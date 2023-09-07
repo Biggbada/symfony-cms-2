@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Provider{% endblock %}
+
+{% block body %}
+    <h1>Provider</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ provider.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ provider.Name }}</td>
+            </tr>
+            <tr>
+                <th>Adress1</th>
+                <td>{{ provider.adress1 }}</td>
+            </tr>
+            <tr>
+                <th>Adress2</th>
+                <td>{{ provider.adress2 }}</td>
+            </tr>
+            <tr>
+                <th>Zipcode</th>
+                <td>{{ provider.zipcode }}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{ provider.city }}</td>
+            </tr>
+            <tr>
+                <th>Country</th>
+                <td>{{ provider.country }}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ provider.phone }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ provider.email }}</td>
+            </tr>
+            <tr>
+                <th>ContactFirstName</th>
+                <td>{{ provider.contactFirstName }}</td>
+            </tr>
+            <tr>
+                <th>ContactLastName</th>
+                <td>{{ provider.contactLastName }}</td>
+            </tr>
+            <tr>
+                <th>ContactPhone</th>
+                <td>{{ provider.contactPhone }}</td>
+            </tr>
+            <tr>
+                <th>ContactEmail</th>
+                <td>{{ provider.contactEmail }}</td>
+            </tr>
+            <tr>
+                <th>Notes</th>
+                <td>{{ provider.notes }}</td>
+            </tr>
+            <tr>
+                <th>Active</th>
+                <td>{{ provider.active ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Catalog</th>
+                <td><a href="{{ asset(catalogs_directory ~ provider.catalog) }}">{{ provider.catalog }}</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_provider_index') }}">back to list</a>
+
+    <a href="{{ path('app_provider_edit', {'id': provider.id}) }}">edit</a>
+
+    {{ include('provider/_delete_form.html.twig') }}
+{% endblock %}
