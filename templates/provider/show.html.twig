@@ -69,7 +69,8 @@
             </tr>
             <tr>
                 <th>Catalog</th>
-                <td><a href="{{ asset(catalogs_directory ~ provider.catalog) }}">{{ provider.catalog }}</a></td>
+                <td ><a href="{{ asset(catalogs_directory ~ provider.catalog) }}" target="_blank">
+                        <img class="w-25" src="{{ asset(catalogs_directory ~ provider.catalog) }}" alt="">{{ provider.catalog }}</a></td>
             </tr>
         </tbody>
     </table>

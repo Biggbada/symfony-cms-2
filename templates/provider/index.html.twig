@@ -21,9 +21,7 @@
                 <th>ContactLastName</th>
                 <th>ContactPhone</th>
                 <th>ContactEmail</th>
-                <th>Notes</th>
                 <th>Active</th>
-                <th>Catalog</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -43,9 +41,7 @@
                 <td>{{ provider.contactLastName }}</td>
                 <td>{{ provider.contactPhone }}</td>
                 <td>{{ provider.contactEmail }}</td>
-                <td>{{ provider.notes }}</td>
                 <td>{{ provider.active ? 'Yes' : 'No' }}</td>
-                <td>{{ provider.catalog }}</td>
                 <td>
                     <a href="{{ path('app_provider_show', {'id': provider.id}) }}">show</a>
                     <a href="{{ path('app_provider_edit', {'id': provider.id}) }}">edit</a>

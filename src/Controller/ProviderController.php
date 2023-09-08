@@ -74,12 +74,34 @@ class ProviderController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_provider_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Provider $provider, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Provider $provider, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(ProviderType::class, $provider);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file = $form['catalog']->getData();
+            if ($file) {
+                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $file->move(
+                        $this->getParameter('catalogs_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                // updates the 'brochureFilename' property to store the PDF file name
+                // instead of its contents
+                $provider->setCatalog($newFilename);
+            }
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_provider_index', [], Response::HTTP_SEE_OTHER);

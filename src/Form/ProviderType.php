@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\UX\Dropzone\Form\DropzoneType;
 
 
 
@@ -37,7 +38,7 @@ class ProviderType extends AbstractType
                 "required"=>false,
             ])
             ->add('active')
-            ->add('catalog', FileType::class, [
+            ->add('catalog', DropzoneType::class, [
                 "required"=>false,  'mapped' => false,
             ])
         ;
