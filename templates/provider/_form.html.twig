@@ -1,6 +1,6 @@
-{% form_theme form 'bootstrap_5_layout.html.twig' %}{{ form_start(form)  }}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
 <div class="container">
-    {{ form_start(form) }}
+    {{ form_start(form, {"attr": {"class" : "", "id" : 'upload-form', "action": "/"}, }) }}
         <div class="row">
             {{ form_row(form.Name) }}
             {{ form_row(form.adress1) }}
@@ -37,11 +37,28 @@
                 <img src="{{ asset(catalogs_directory ~ provider.catalog) }}" alt="">
             {% endif %}
             {{ form_row(form.catalog) }}
-            {{ stimulus_controller('hello') }}
-
+            <div id="thumbs">
+                <ul></ul>
+            </div>
         </div>
-{{ form_end(form) }}
     <div class="row-cols-lg-3">
-    <button class="btn">{{ button_label|default('Save') }}</button>
+        <button class="btn" type="submit" id="submit-form">{{ button_label|default('Save') }}</button>
     </div>
+{{ form_end(form) }}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        $('input#provider_catalog').on('change', function() {
+            for (var i = 0; i < this.files.length; i++) {
+                (function(file) {
+                    var name = file.name;
+                    var fr = new FileReader();
+                    fr.onload = function(e) {
+                        console.log(e);
+                        $('#thumbs ul').append('<li><object data="' + e.target.result + '" type=""></object></li>');
+                    };
+                    fr.readAsDataURL(file);
+                })(this.files[i])
+            }
+        });
+    </script>
 </div>

@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
+
+use App\Model\TimestampedInterface;
 use App\Repository\ProviderRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProviderRepository::class)]
-class Provider
+class Provider implements TimestampedInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -58,6 +60,12 @@ class Provider
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $catalog = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     public function getId(): ?int
     {
@@ -240,6 +248,30 @@ class Provider
     public function setCatalog(?string $catalog): static
     {
         $this->catalog = $catalog;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): static
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): static
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

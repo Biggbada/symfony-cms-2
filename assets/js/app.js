@@ -1,14 +1,10 @@
 import '../css/app.scss';
 import { Controller } from '@hotwired/stimulus';
 
-require('bootstrap');
-import 'bootstrap'
-import {dropdown} from "bootstrap/js/src/dropdown";
+const $ = require('jquery');
+// this "modifies" the jquery module: adding behavior to it
+// the bootstrap module doesn't export/return anything
+const bootstrap = require('bootstrap');
+const { Dropzone } = require("dropzone");
 
-document.addEventListener("DOMContentLoaded", () => {
-    enableDropdowns()
-} )
-const enableDropdowns = ()=> {
-    const dropdownElementList = document.querySelectorAll('.dropdown-toggle')
-    const dropdownList = [...dropdownElementList].map(dropdownToggleEl => new Dropdown(dropdownToggleEl))
-}
+

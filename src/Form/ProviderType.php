@@ -38,9 +38,11 @@ class ProviderType extends AbstractType
                 "required"=>false,
             ])
             ->add('active')
-            ->add('catalog', DropzoneType::class, [
+            ->add('catalog', FileType::class, [
                 "required"=>false,  'mapped' => false,
             ])
+            ->add('createdAt')
+            ->add('updatedAt')
         ;
     }
 

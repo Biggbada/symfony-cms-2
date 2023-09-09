@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Provider;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
@@ -35,6 +36,10 @@ class ProviderCrudController extends AbstractCrudController
         yield TextareaField::new('notes');
         yield BooleanField::new('active');
         yield ImageField::new('catalog')->setUploadDir('/public/uploads/catalogs');
+        yield DateTimeField::new('createdAt')
+            ->hideOnForm();
+        yield DateTimeField::new('updatedAt')
+            ->hideOnForm();
 
 
     }
