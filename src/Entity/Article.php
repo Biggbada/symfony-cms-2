@@ -35,7 +35,7 @@ class Article implements TimestampedInterface
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
 
-    #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'articles')]
+    #[ORM\ManyToMany(mappedBy: 'articles', targetEntity: Category::class)]
     private Collection $categories;
 
     #[ORM\OneToMany(mappedBy: 'relation', targetEntity: Comment::class, orphanRemoval: true)]
