@@ -1,16 +1,27 @@
 import '../css/app.scss';
+import {Dropdown} from "bootstrap";
 
 const $ = require('jquery');
 // this "modifies" the jquery module: adding behavior to it
 // the bootstrap module doesn't export/return anything
 const bootstrap = require('bootstrap');
+console.log('coucou');
 
 document.addEventListener('DOMContentLoaded', ()=> {
+    console.log('dom chargé');
     new App();
 })
 class App {
     constructor() {
+        this.enableDropdowns();
         this.handleCommentForm();
+    }
+
+    enableDropdowns() {
+        const dropDownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'))
+        dropDownElementList.map(function (dropdownToggleEl) {
+            return new Dropdown(dropdownToggleEl)
+        })
     }
 
     handleCommentForm() {
