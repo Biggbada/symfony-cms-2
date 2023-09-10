@@ -24,6 +24,15 @@ class Comment
     #[ORM\JoinColumn(nullable: false)]
     private ?Article $relation = null;
 
+    #[ORM\ManyToOne(inversedBy: 'comments')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
+    public function __construct(Article $article)
+    {
+        $this->article = $article;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -61,6 +70,18 @@ class Comment
     public function setRelation(?Article $relation): static
     {
         $this->relation = $relation;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }

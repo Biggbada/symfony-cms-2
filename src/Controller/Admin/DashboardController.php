@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Article;
 use App\Entity\Category;
+use App\Entity\Comment;
 use App\Entity\Provider;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -38,7 +39,7 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToRoute('Accueil', 'fa fa-sign-out' ,'app_home');
+        yield MenuItem::linkToRoute('Accueil', 'fa fa-undo' ,'app_home');
 
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
 
@@ -56,5 +57,7 @@ class DashboardController extends AbstractDashboardController
 
 
         ]);
+
+        yield MenuItem::linkToCrud('Commentaires', 'fas fa-comment', Comment::class);
     }
 }
