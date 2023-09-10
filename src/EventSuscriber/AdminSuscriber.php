@@ -22,7 +22,6 @@ class AdminSuscriber implements EventSubscriberInterface
     {
         /** @var Article $entity */
         $entity = $event->getEntityInstance();
-        dump($event);
         if(!$entity instanceof TimestampedInterface)
         {
             return;
@@ -31,7 +30,7 @@ class AdminSuscriber implements EventSubscriberInterface
         dump($entity);
     }
 
-    public function setEntityUpdatedAt(BeforeEntityPersistedEvent $event) :void
+    public function setEntityUpdatedAt(BeforeEntityUpdatedEvent $event) :void
     {
         $entity = $event->getEntityInstance();
 

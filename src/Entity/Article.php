@@ -27,7 +27,7 @@ class Article implements TimestampedInterface
     private ?string $content = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $featured = null;
+    private ?string $featuredText = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
@@ -42,7 +42,7 @@ class Article implements TimestampedInterface
     private Collection $comments;
 
     #[ORM\ManyToOne]
-    private ?Media $feturedImage = null;
+    private ?Media $featuredImage = null;
 
     public function __construct()
     {
@@ -91,14 +91,14 @@ class Article implements TimestampedInterface
         return $this;
     }
 
-    public function getFeatured(): ?string
+    public function getFeaturedText(): ?string
     {
-        return $this->featured;
+        return $this->featuredText;
     }
 
-    public function setFeatured(?string $featured): static
+    public function setFeaturedText(?string $featuredText): static
     {
-        $this->featured = $featured;
+        $this->featuredText = $featuredText;
 
         return $this;
     }
@@ -184,14 +184,14 @@ class Article implements TimestampedInterface
         return $this;
     }
 
-    public function getFeturedImage(): ?Media
+    public function getFeaturedImage(): ?Media
     {
-        return $this->feturedImage;
+        return $this->featuredImage;
     }
 
-    public function setFeturedImage(?Media $feturedImage): static
+    public function setFeaturedImage(?Media $featuredImage): static
     {
-        $this->feturedImage = $feturedImage;
+        $this->featuredImage = $featuredImage;
 
         return $this;
     }
