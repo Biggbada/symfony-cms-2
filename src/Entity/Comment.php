@@ -22,7 +22,7 @@ class Comment
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Article $relation = null;
+    private ?Article $article = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
@@ -62,14 +62,14 @@ class Comment
         return $this;
     }
 
-    public function getRelation(): ?Article
+    public function getArticle(): ?Article
     {
-        return $this->relation;
+        return $this->article;
     }
 
-    public function setRelation(?Article $relation): static
+    public function setArticle(?Article $article): static
     {
-        $this->relation = $relation;
+        $this->article = $article;
 
         return $this;
     }

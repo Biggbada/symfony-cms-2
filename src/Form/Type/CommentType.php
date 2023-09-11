@@ -11,7 +11,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use function Sodium\add;
 
 class CommentType extends AbstractType
 {
@@ -27,7 +26,7 @@ public function buildForm(FormBuilderInterface $builder, array $options)
 ]);
 
     $builder->get('article')
-        ->AddModelTransformer(new CallbackTransformer(
+        ->addModelTransformer(new CallbackTransformer(
             fn(Article $article) => $article->getId(),
             fn(Article $article) => $article->getTitle()
         ));
@@ -36,7 +35,8 @@ public function buildForm(FormBuilderInterface $builder, array $options)
 public function configureOptions(OptionsResolver $resolver)
 {
     $resolver->setDefaults([
-        'data-class' => Comment::class
+        'data-class' => Comment::class,
+        'csrf_token_id' => 'comment-add'
     ]);
 }
 }
