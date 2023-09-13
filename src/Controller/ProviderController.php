@@ -3,18 +3,28 @@
 namespace App\Controller;
 
 use App\Entity\Provider;
+use App\Events\ProviderCreatedEvent;
+use App\EventSubscriber\ProviderEventSubscriber;
 use App\Form\ProviderType;
 use App\Repository\ProviderRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/provider')]
 class ProviderController extends AbstractController
 {
+
+    public function __construct(EventDispatcherInterface $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
     #[Route('/', name: 'app_provider_index', methods: ['GET'])]
     public function index(ProviderRepository $providerRepository): Response
     {
@@ -24,14 +34,33 @@ class ProviderController extends AbstractController
     }
 
     #[Route('/new', name: 'app_provider_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
+    public function new(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        SluggerInterface $slugger)
+    : Response
     {
         $provider = new Provider();
         $form = $this->createForm(ProviderType::class, $provider);
         $form->handleRequest($request);
 
+
+        //    dd($form);
+//            $newProviderEvent = new ProviderCreatedEvent();
+//            $this->eventDispatcher->dispatch($newProviderEvent, ProviderCreatedEvent::NAME);
+
+
+//        if($form->isSubmitted() && !$form->isValid()) {
+//            $newProviderEvent = new ProviderCreatedEvent();;
+////            dd($newProviderEvent);
+//            $this->eventDispatcher->dispatch($newProviderEvent, ProviderCreatedEvent::NAME);
+//        }
+
+
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form['catalog']->getData();
+            $provider->setCreatedAt();
+
             if ($file) {
                 $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
@@ -54,6 +83,11 @@ class ProviderController extends AbstractController
             }
             $entityManager->persist($provider);
             $entityManager->flush();
+            $newProviderEvent = new ProviderCreatedEvent();
+//            dd($newProviderEvent);
+//            $this->eventDispatcher->addSubscriber(new ProviderEventSubscriber());
+
+            $this->eventDispatcher->dispatch($newProviderEvent, ProviderCreatedEvent::NAME);
 
             return $this->redirectToRoute('app_provider_index', [], Response::HTTP_SEE_OTHER);
         }

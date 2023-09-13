@@ -45,11 +45,13 @@
                 </span>
             </a>
             <ul class="nav nav-pills">
+                {% if not is_granted('ROLE_USER') %}
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="#">S'inscrire</a>
+                    <a class="nav-link text-dark" href="{{ path('app_register') }}">S'inscrire</a>
                 </li>
+                {% endif %}
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="#">Se connecter</a>
+                    <a class="nav-link text-dark" href="{{ path('app_login') }}">Se connecter</a>
                 </li>
             </ul>
         </header>

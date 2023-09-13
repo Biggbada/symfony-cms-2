@@ -2,12 +2,16 @@
 
 namespace App\Entity;
 
+use App\Events\ProviderCreatedEvent;
+use App\EventSubscriber\ProviderEventSubscriber;
 use App\Model\TimestampedInterface;
 use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 class Article implements TimestampedInterface
@@ -38,8 +42,10 @@ class Article implements TimestampedInterface
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'articles')]
     private Collection $categories;
 
-    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comment::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comment::class, fetch: 'EAGER', orphanRemoval: true)]
+    #[ORM\OrderBy(['createdAt' => 'DESC'])]
     private Collection $comments;
+
 
     #[ORM\ManyToOne]
     private ?Media $featuredImage = null;
@@ -108,7 +114,7 @@ class Article implements TimestampedInterface
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): static
+    public function setCreatedAt( \DateTimeInterface $createdAt): static
     {
         $this->createdAt = $createdAt;
 

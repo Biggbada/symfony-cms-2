@@ -1,6 +1,6 @@
 <?php
 
-namespace App\EventSuscriber;
+namespace App\EventSubscriber;
 
 use App\Entity\Article;
 use App\Model\TimestampedInterface;
@@ -9,7 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
 use PhpParser\Node\Expr\Array_;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class AdminSuscriber implements EventSubscriberInterface
+class AdminSubscriber implements EventSubscriberInterface
 {
     public static function getSubscribedEvents():array
     {
