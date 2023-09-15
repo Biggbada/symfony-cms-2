@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello WebBreachesController!{% endblock %}
+
+{% block body %}
+    {% for item in response %}
+        <h2>{{ item.Name }}</h2>
+        <img width="100" src="{{ item.LogoPath }}" alt="">
+        <p>Date de la faille: {{ item.BreachDate }}</p>
+        <p>Date d'ajout: {{ item.AddedDate }}</p>
+        <p>Description: <br> {{ item.Description|raw }}</p>
+        
+    <p>{{ item.Domain }}</p>
+        <hr>
+    {% endfor %}
+{% endblock %}

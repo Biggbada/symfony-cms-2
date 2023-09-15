@@ -28,8 +28,9 @@ class ChuckNorrisController extends AbstractController
             );
 
 
+            dd($response);
         $joke = $response->toArray();
-
+dump($joke);
             // Traduction
             $recherche = urlencode(str_replace('.','#',$joke['value'])) ;
             $response = $client->request(
@@ -37,6 +38,7 @@ class ChuckNorrisController extends AbstractController
                 "https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=fr&dt=t&q=${recherche}",
             );
             $translate = $response->toArray();
+            dd($translate);
             $blague['anglais'] = $joke['value'];
             $blague['francais'] = str_replace("#",".",$translate[0][0][0]);
 
