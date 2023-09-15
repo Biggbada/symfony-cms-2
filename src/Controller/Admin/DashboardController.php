@@ -5,6 +5,8 @@ namespace App\Controller\Admin;
 use App\Entity\Article;
 use App\Entity\Category;
 use App\Entity\Comment;
+use App\Entity\Media;
+use App\Entity\Medias;
 use App\Entity\Provider;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -60,5 +62,9 @@ class DashboardController extends AbstractDashboardController
         ]);
 
         yield MenuItem::linkToCrud('Commentaires', 'fas fa-comment', Comment::class);
+        yield MenuItem::linkToCrud('Medias', 'fa-solid fa-photo-film', Medias::class);
     }
+
+
 }
+

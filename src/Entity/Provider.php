@@ -5,6 +5,8 @@ namespace App\Entity;
 
 use App\Model\TimestampedInterface;
 use App\Repository\ProviderRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -66,6 +68,14 @@ class Provider implements TimestampedInterface
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
+
+    #[ORM\ManyToMany(targetEntity: Medias::class)]
+    private Collection $medias;
+
+    public function __construct()
+    {
+        $this->medias = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -275,4 +285,30 @@ class Provider implements TimestampedInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Medias>
+     */
+    public function getMedias(): Collection
+    {
+        return $this->medias;
+    }
+
+    public function addMedia(Medias $media): static
+    {
+        if (!$this->medias->contains($media)) {
+            $this->medias->add($media);
+        }
+
+        return $this;
+    }
+
+    public function removeMedia(Medias $media): static
+    {
+        $this->medias->removeElement($media);
+
+        return $this;
+    }
+
+
 }
