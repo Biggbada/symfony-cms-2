@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ChuckNorrisController!{% endblock %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block body %}
+    
+    <div class="text-center flex-row align-items-center justify-content-center">
+        <img height="500" src="{{ random(images) }}" alt="">
+        <blockquote class="fs-4">
+            <hr>
+            {{ blague.anglais|capitalize }}
+            <hr>
+            {{ blague.francais|capitalize }}
+            <hr>
+        </blockquote>
+    </div>
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}

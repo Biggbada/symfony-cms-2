@@ -38,7 +38,7 @@ class Article implements TimestampedInterface
     #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'articles')]
     private Collection $categories;
 
-    #[ORM\OneToMany(mappedBy: 'relation', targetEntity: Comment::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'relation', targetEntity: Comment::class, fetch: 'LAZY', orphanRemoval: true)]
     private Collection $comments;
 
     #[ORM\ManyToOne]
