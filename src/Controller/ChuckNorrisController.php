@@ -28,9 +28,7 @@ class ChuckNorrisController extends AbstractController
             );
 
 
-            dd($response);
         $joke = $response->toArray();
-dump($joke);
             // Traduction
             $recherche = urlencode(str_replace('.','#',$joke['value'])) ;
             $response = $client->request(
@@ -38,7 +36,6 @@ dump($joke);
                 "https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=fr&dt=t&q=${recherche}",
             );
             $translate = $response->toArray();
-            dd($translate);
             $blague['anglais'] = $joke['value'];
             $blague['francais'] = str_replace("#",".",$translate[0][0][0]);
 
@@ -50,6 +47,7 @@ dump($joke);
             "https://neural.love/cdn/ai-photostock/1ee4a0ee-c69a-64da-8185-5fd15d0c0050/0.jpg?Expires=1698796799&Signature=4P4pluCfqE9Wbd8pj5AHQvXve3uKqgXGF3-feVUNeuZIahAOKZ6TSIEn5rdUQlUbCrxnx~4UZ~zg88ypERY5BMtFyfm0FE35un4r~O0XmSOSBaYMLz~cQuQ7HD5ZvrlafOghNBKJENYyc-8pzTT0Uzixjx4czo6U8RIhBDju0K69LUxD-O1j-NkZ4uXJIy~BT9VdUC5sAC85p6ibgBOzsN~FvdAgxccCgJo1i7OdYYXryd14kIKGsvKhVCVokVCq1vSoK7Mi6rvvTzhRIpehk7~KP5I~wWaxPGifJKZNKjWdttBS2nk9ngl5OZzVrheZaH1HHbiQV1Bo3OxWXMMO7Q__&Key-Pair-Id=K2RFTOXRBNSROX"
         ];
         } catch (ExceptionInterface $e) {
+            dump($e);
         } 
 
         return $this->render("chuck_norris/index.html.twig",[

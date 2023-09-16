@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5fac5d4a-154b-4a4a-bf34-4e6478e8d306" name="Changes" comment="management of provider admin is ok">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/ChuckNorrisController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ChuckNorrisController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +34,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="dev-chuck" />
+        <entry key="$PROJECT_DIR$" value="dev" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -259,6 +261,9 @@
       <workItem from="1694766054178" duration="4893000" />
       <workItem from="1694779249992" duration="7202000" />
       <workItem from="1694808350796" duration="306000" />
+      <workItem from="1694863414355" duration="38000" />
+      <workItem from="1694866699079" duration="418000" />
+      <workItem from="1694867359921" duration="8307000" />
     </task>
     <task id="LOCAL-00001" summary="for Provider class:&#10;eventSubscriber ok on standard form, not in easy admin">
       <option name="closed" value="true" />
@@ -296,6 +301,6 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="for Provider class:&#10;eventSubscriber ok on standard form, not in easy admin" />
     <MESSAGE value="management of provider admin is ok" />
-    <option name="LAST_COMMIT_MESSAGE" value="management of provider admin is ok" />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
 </project>
